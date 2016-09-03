@@ -1,30 +1,57 @@
 class Controller
 
-	attr_reader :playground, :commands, :car	
+	attr_reader :commands, :car	
 
-	def initialize(playground,car,cmd)
-		@playground = playground
+	def initialize car
 		@car = car
-		@commands = parse_command(cmd)
-	    @orientations = ['N','E','S','W']
 	end
 
-	def parse_command(cmd_str)
-		cmd_str.split(//)
+	#parse the commands string to array
+	def parse_cmd commands
+		@commands = commands.split(//)
 	end
 
-	def drive()
+	#drive the car by the commands array
+	def drive
 		@commands.each do |cmd|
 			unless cmd == 'M'
-				car.change_orientation(cmd)
+				veer(cmd)
 			else
-				car.move();
+				move();
 			end
 		end
 	end
 
-	def result
-		@orientation = @orientations[@car.orientation]
-		puts "#{ @car.x } #{ @car.y }  #{ @orientation }"
+	#change the orientation of the car if the command is "L" or "R"
+	def veer cmd
+		case cmd
+			when 'L'  
+				@car.orientation = @car.orientation-1<0 ? 3 : @car.orientation-1
+			when 'R' 
+				@car.orientation = (@car.orientation+1)%4			
+		end
 	end
+
+	#move forword if the command is "M" 
+	def move
+		case @car.orientation
+			when 0 
+				if @car.y+1 <= @car.playground.top
+					@car.y += 1
+				end
+			when 2
+				if @car.y-1 >= 0
+					@car.y -= 1
+				end
+			when 1
+				if @car.x+1 <= @car.playground.left
+					@car.x += 1
+				end
+			when 3
+				if @car.x+1 >= 0
+					@car.x -= 1
+				end
+		end
+	end
+
 end

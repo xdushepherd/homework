@@ -1,52 +1,41 @@
+require './Controller.rb'
+
 class Car
 
+	attr_accessor :x, :y, :orientation, :playground, :commands, :controller
 	attr_reader :x, :y, :orientation
-	@@orientations = {"N" => 0,"E" =>1,"S" =>2, "W" => 3}
-	@@i = 0;
 
-	def initialize(x,y,orientation,playground)
-		@x = x
+	#orientations for all cars as Class variales
+	@@orientations_hash = {"N" => 0,"E" =>1,"S" =>2, "W" => 3}
+    @@orientations_arr = ['N','E','S','W']
+
+	def initialize x,y,orientation
+		# x position
+		@x = x 
+
+		# y position
 		@y = y
-		@orientation = @@orientations[orientation]
-		@playground = playground
+
+		#convert the orietation letter to integer for the convenience of calculate
+		@orientation = @@orientations_hash[orientation] 
+		
+		#the  initializtion of the car's controller
+		@controller =  Controller.new(self)
 	end
 
-	def change_orientation(cmd)
-		case cmd
-			when 'L'  
-				if @orientation-1<0
-					@orientation = 3
-				else
-					@orientation -= 1
-				end
-				puts @orientation
-			when 'R' 
-				@orientation = (@orientation+1)%4
-				puts @orientation
-			
-		end
+	#parse the commands to array by controller's method named commands 
+	def commands=(commands)
+		@controller.parse_cmd(commands)
 	end
 
-	def move()
-		case @orientation
-			when 0 
-				if @y+1 <= @playground.top
-					@y += 1
-				end
-			when 2
-				if @y-1 >= 0
-					@y -= 1
-				end
-			when 1
-				if @x+1 <= @playground.left
-					@x += 1
-				end
-			when 3
-				if @x+1 >= 0
-					@x -= 1
-				end
-			else
-				puts 'Nothing done!!'		
-		end
+	#drive the car according the commands by controller
+	def drive
+		@controller.drive
+	end
+
+	#puts the postion and orientation information on the console 
+	def status
+		@ori = @@orientations_arr[@orientation]
+		puts "#{ @x } #{ @y }  #{ @ori }"
 	end
 end
