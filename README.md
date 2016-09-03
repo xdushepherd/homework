@@ -7,4 +7,4 @@
   3.当car位于边界时，转向操作有效
 ##测试
   1. $ cd /demo;ruby demo.rb
-  2. $ cd lib;ruby rub.rb
+  2. $ cd lib;ruby run.rb
