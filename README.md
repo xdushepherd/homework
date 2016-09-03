@@ -5,3 +5,6 @@
   2.当car要进行越界操作的时候，比如在右上角时，有向N或者向E的M动作，则动作无效
   
   3.当car位于边界时，转向操作有效
+##测试
+  1. $ cd /demo;ruby demo.rb
+  2. $ cd lib;ruby rub.rb
