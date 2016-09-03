@@ -1,6 +1,6 @@
-require "#{File.dirname(__FILE__)}/Car.rb"
-require "#{File.dirname(__FILE__)}/Playground.rb"
-require "#{File.dirname(__FILE__)}/Integration.rb"
+require "#{File.dirname(__FILE__)}/../lib/Car.rb"
+require "#{File.dirname(__FILE__)}/../lib/Playground.rb"
+require "#{File.dirname(__FILE__)}/../lib/Integration.rb"
 
 
 playground = Playground.new(5,5)
@@ -35,6 +35,7 @@ integration.addCar car8
 
 integration.execute
 integration.result
+
 
 
 
