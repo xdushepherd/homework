@@ -3,7 +3,7 @@ require "#{File.dirname(__FILE__)}/Controller.rb"
 class Car
 
 	attr_accessor :x, :y, :orientation, :playground, :commands, :controller, :outOfRange
-	attr_reader :x, :y, :orientation
+	attr_reader :x, :y
 
 	#orientations for all cars as Class variales
 	@@orientations_hash = {"N" => 0,"E" =>1,"S" =>2, "W" => 3}
@@ -41,18 +41,18 @@ class Car
 	end
 
 	#judge if the next move of the will make it run across the bound
-	def overFlow?
+	def toBeOverFlow?
 		case @orientation 
 			when 0
-				return @y+1 > @playground.top
+				@y+1 > @playground.top
 			when 1
-				return @x+1 > @playground.right
+				@x+1 > @playground.right
 			when 2
-				return @y-1 < 0
+				@y-1 < 0
 			when 3
-				return @x-1 < 0	
+				@x-1 < 0	
 			else
-				return true	
+				true	
 		end		
 	end
 

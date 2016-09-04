@@ -17,10 +17,8 @@ class Controller
 			unless cmd == 'M'
 				veer cmd
 			else
-				unless @car.overFlow?
-					move 	
-				else
-					puts "I am on the bound and cannot move forword"
+				unless @car.toBeOverFlow?
+					move
 				end
 			end
 		end
@@ -28,12 +26,10 @@ class Controller
 
 	#change the orientation of the car if the command is "L" or "R"
 	def veer cmd
-		case cmd
-			when 'L'  
-				@car.orientation = @car.orientation-1<0 ? 3 : @car.orientation-1
-			when 'R' 
-				@car.orientation = (@car.orientation+1)%4			
-		end
+		@car.orientation =  case cmd
+							when 'L' then @car.orientation-1<0 ? 3 : @car.orientation-1
+							when 'R' then (@car.orientation+1)%4			
+							end
 	end
 
 	#move forword if the command is "M" 
@@ -47,8 +43,6 @@ class Controller
 				@car.x += 1
 			when 3
 				@car.x -= 1
-			else
-				puts "something wrong"
 		end
 	end
 

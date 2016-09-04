@@ -6,5 +6,10 @@
   
   3.当car位于边界时，转向操作有效
 ##测试
-  1. $ cd /demo;ruby demo.rb
-  2. $ cd lib;ruby run.rb
+
+###方式一:
+   $ cd /demo;ruby demo1.rb
+
+###方式二：
+   $ cd /demo;ruby demo2.rb
+   方法二需要手动输入操场及位置信息，按照示例的输入格式即可。
